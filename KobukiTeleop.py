@@ -14,16 +14,17 @@ class KobukiTeleop(AbstractVirtualCapability):
 
     def loop(self):
         command = {"type": "response", "capability": "pressedButton", "parameters": {}, "src": f"KobukiTeleop-{time.time()}"}
-        if self.functionality["pressedJoyA"]():
-            command["parameters"]["XBOX360Button"] = "A"
-        elif self.functionality["pressedJoyB"]():
-            command["parameters"]["XBOX360Button"] = "B"
-        elif self.functionality["pressedJoyX"]():
-            command["parameters"]["XBOX360Button"] = "X"
-        elif self.functionality["pressedJoyY"]():
-            command["parameters"]["XBOX360Button"] = "Y"
-        if command["parameters"]["XBOX360Button"] is not None:
-            self.send_message(command)
+        if self.functionality["pressedJoyA"] is not None:
+            if self.functionality["pressedJoyA"]():
+                command["parameters"]["XBOX360Button"] = "A"
+            elif self.functionality["pressedJoyB"]():
+                command["parameters"]["XBOX360Button"] = "B"
+            elif self.functionality["pressedJoyX"]():
+                command["parameters"]["XBOX360Button"] = "X"
+            elif self.functionality["pressedJoyY"]():
+                command["parameters"]["XBOX360Button"] = "Y"
+            if command["parameters"]["XBOX360Button"] is not None:
+                self.send_message(command)
 
 
 if __name__ == '__main__':
