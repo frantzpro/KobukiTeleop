@@ -11,17 +11,13 @@ from KobukiTeleop import KobukiTeleop
 
 max_timeout = 5
 
-pressed_a = 0
-pressed_b = 0
-pressed_x = 0
-pressed_y = 0
-
 
 def callback(data):
 	buttons_abxy = data.buttons[:4]
 	if any(buttons_abxy):
 		#print(buttons_abxy)
-		pub.publish(str(buttons_abxy))
+		#pub.publish(str(buttons_abxy))
+		pass
 	pressed_a = time.time() if data.buttons[0] == 1 else pressed_a
 	pressed_b = time.time() if data.buttons[1] == 1 else pressed_b
 	pressed_x = time.time() if data.buttons[2] == 1 else pressed_x
@@ -29,7 +25,12 @@ def callback(data):
 
 
 if __name__ == '__main__':
-	global pub
+	#global pub
+	pressed_a = 0
+	pressed_b = 0
+	pressed_x = 0
+	pressed_y = 0
+
 	pub = rospy.Publisher('/joy_button_reader_input', String, queue_size=100)
 	# subscribed to joystick inputs on topic "joy"
 	rospy.Subscriber("joy", Joy, callback)
