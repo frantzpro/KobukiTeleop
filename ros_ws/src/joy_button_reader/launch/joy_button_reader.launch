@@ -3,20 +3,19 @@
     Push the left frontal button labeled as 'LB' to activate cmd_vel publishing.
     Move the left stick around to control the velocity.
    -->
-	<arg name="vicon_map" value="world"/>
-	<arg name="semantix_port" default="7500"/>
+<arg name="vicon_map" value="world"/>
+<arg name="semantix_port" default="7500"/>
 
-    <include file="$(find vrpn_client_ros)/launch/sample.launch">
-    		<arg name="server" value="172.20.37.251" />
-  	</include>
+<include file="$(find vrpn_client_ros)/launch/sample.launch">
+	<arg name="server" value="172.20.37.251" />
+</include>
   <!--  smooths inputs from cmd_vel_mux/input/teleop_raw to cmd_vel_mux/input/teleop -->
-  <node pkg="joy_button_reader" type="joy_button_reader.py" name="joy_reader"/>
 
-    <node pkg="joy_button_reader" type="joy_button_reader.py" name="joy_reader_$(semantix_port)">
+<node pkg="joy_button_reader" type="joy_button_reader.py" name="joy_reader_$(semantix_port)">
 		<param name="world" value="$(arg vicon_map)"/>
 		<param name="position" value="turtlebot/position"/>
 		<param name="semantix_port" value="$(arg semantix_port)"/>
-	</node>
+</node>
 
   <include file="$(find turtlebot_teleop)/launch/includes/velocity_smoother.launch.xml"/>
 
