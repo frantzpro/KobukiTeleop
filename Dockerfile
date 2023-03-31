@@ -34,14 +34,20 @@ COPY requirements /var
 RUN cd /ros_ws && source /opt/ros/noetic/setup.bash && catkin_make #turtlebot_teleop
 RUN source /ros_ws/devel/setup.bash
 
-#RUN export $(ROS_MASTER_URI)=http://172.20.37.158:11311
+# docker build -t joy_docker
+# docker run -it --device=/dev/input/js0 --net=host joy_docker
+# to open another terminal
+#   docker container list --> <name>
+#   docker exec -it <name> bash
+
 
 #Setup Env
 ENTRYPOINT ["/ros_entrypoint.sh"]
 
+RUN echo "export ROS_MASTER_URI=http://172.20.37.158:11311" >> $HOME/.bashrc
 
-
-#Start Copter
-#CMD source /ros_ws/devel/setup.bash && roslaunch turtlebot_teleop xbox360_teleop.launch semantix_port:=${semantix_port}
+#Start Joy Controler
+CMD source /ros_ws/devel/setup.bash && roslaunch joy_button_reader joy_button_reader.launch semantix_port:=${semantix_port}
+#&& rosrun joy_button_reader joy_button_reader.py
 #${semantix_port}
-CMD bash
+#CMD bash
