@@ -27,8 +27,8 @@ RUN cd ros_ws && source /opt/ros/noetic/setup.bash && rosdep install --from-path
 # Build Ros-Pkg and build
 #RUN cd /ros_ws && source /opt/ros/noetic/setup.bash && catkin build turtlebot ycos_cmd_vel_mux ycos_controllers ycos_velocity_smoother
 
-#COPY KobukiTeleop.py ros_ws/src/rospkg
-#COPY AbstractVirtualCapability.py ros_ws/src/rospkg
+COPY KobukiTeleop.py ros_ws/src/joy_button_reader
+COPY AbstractVirtualCapability.py ros_ws/src/joy_button_reader
 COPY requirements /var
 
 RUN cd /ros_ws && source /opt/ros/noetic/setup.bash && catkin_make #turtlebot_teleop

@@ -9,47 +9,20 @@ from AbstractVirtualCapability import AbstractVirtualCapability, VirtualCapabili
 class KobukiTeleop(AbstractVirtualCapability):
     def __init__(self, server):
         super().__init__(server)
-        self.ISSECopterPosition = [0., 0., 0.]
-        self.functionality = {"arm": None, "disarm": None, "SetISSECopterPosition": None, "GetISSECopterPosition": None, "GetArmingStatus" : None}
-
-    def SetArmingStatus(self, params: dict):
-        formatPrint(self, f"Set Arming Status to {params}")
-        p = params["SimpleBooleanParameter"]
-        if p and self.functionality["arm"] is not None:
-            self.functionality["arm"]()
-        elif not p and self.functionality["disarm"] is not None:
-            self.functionality["disarm"]()
-        return params
-
-    def GetArmingStatus(self, params: dict):
-        if self.functionality["GetArmingStatus"] is not None:
-            return self.functionality["GetArmingStatus"]()
-        return {"SimpleBooleanParameter": False}
-
-    def SetISSECopterPosition(self, params: dict) -> dict:
-        try:
-            p = params["Position3D"]
-        except:
-            return self.GetISSECopterPosition(params)
-        formatPrint(self, f"Flying to {p}")
-        if self.functionality["SetISSECopterPosition"] is not None:
-            self.functionality["SetISSECopterPosition"](p)
-        else:
-            sleep(5)
-        return self.GetISSECopterPosition({})
-
-    def GetISSECopterPosition(self, params: dict) -> dict:
-        if self.functionality["GetISSECopterPosition"] is not None:
-            pos = self.functionality["GetISSECopterPosition"]()
-            self.ISSECopterPosition = pos
-        return {"Position3D": self.ISSECopterPosition}
-
-    def FlyToPosition(self, params: dict) -> dict:
-        formatPrint(self, f"Flying to position {params}")
-        return self.SetISSECopterPosition(params)
+        self.functionality = {"pressedJoyA": None, "pressedJoyB": None, "pressedJoyX": None, "pressedJoyY": None}
 
     def loop(self):
-        pass
+        command = {"type": "response", "capability": "pressedButton", "parameters": {}}
+        if self.functionality["pressedJoyA"]():
+            command["parameters"]["Button"] = "A"
+        elif self.functionality["pressedJoyB"]():
+            command["parameters"]["Button"] = "B"
+        elif self.functionality["pressedJoyX"]():
+            command["parameters"]["Button"] = "X"
+        elif self.functionality["pressedJoyY"]():
+            command["parameters"]["Button"] = "Y"
+        if command["parameters"]["Button"] is not None:
+            self.send_message(command)
 
 
 if __name__ == '__main__':
