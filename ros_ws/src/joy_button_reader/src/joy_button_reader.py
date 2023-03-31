@@ -39,10 +39,10 @@ if __name__ == '__main__':
 
 	server = VirtualCapabilityServer(int(rospy.get_param('~semantix_port')))
 	kobuki = KobukiTeleop(server)
-	kobuki.pressedJoyA = lambda: (time.time() - pressed_a) < max_timeout
-	kobuki.pressedJoyB = lambda: (time.time() - pressed_b) < max_timeout
-	kobuki.pressedJoyX = lambda: (time.time() - pressed_x) < max_timeout
-	kobuki.pressedJoyY = lambda: (time.time() - pressed_y) < max_timeout
+	kobuki.functionality["pressedJoyA"] = lambda: (time.time() - pressed_a) < max_timeout
+	kobuki.functionality["pressedJoyB"] = lambda: (time.time() - pressed_b) < max_timeout
+	kobuki.functionality["pressedJoyX"] = lambda: (time.time() - pressed_x) < max_timeout
+	kobuki.functionality["pressedJoyY"] = lambda: (time.time() - pressed_y) < max_timeout
 	kobuki.start()
 
 	while not rospy.is_shutdown() and server.running:
