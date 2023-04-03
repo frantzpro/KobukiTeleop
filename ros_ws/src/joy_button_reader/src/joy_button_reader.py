@@ -10,9 +10,16 @@ from AbstractVirtualCapability import VirtualCapabilityServer
 from KobukiTeleop import KobukiTeleop
 
 max_timeout = 5
-
+pressed_a = 0
+pressed_b = 0
+pressed_x = 0
+pressed_y = 0
 
 def callback(data):
+	global pressed_a
+	global pressed_b
+	global pressed_x
+	global pressed_y
 	buttons_abxy = data.buttons[:4]
 	if any(buttons_abxy):
 		#print(buttons_abxy)
