@@ -112,7 +112,7 @@ catkin_package(
 #  DEPENDS system_lib
 )
 
-catkin_install_python(PROGRAMS src/joy_button_reader.py
+catkin_install_python(PROGRAMS joy_button_reader.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

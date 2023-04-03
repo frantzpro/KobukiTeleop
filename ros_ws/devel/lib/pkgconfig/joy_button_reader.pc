@@ -1,0 +1,8 @@
+prefix=/home/rosrunner/Documents/Eve_of_Destruction/KobukiTeleop/ros_ws/devel
+
+Name: joy_button_reader
+Description: Description of joy_button_reader
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
