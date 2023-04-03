@@ -23,14 +23,16 @@ RUN source ~/.bashrc
 ADD ros_ws /ros_ws
 COPY protocols /etc
 
-RUN cd ros_ws && source /opt/ros/noetic/setup.bash && rosdep install --from-paths . --ignore-src -r -y
 # Build Ros-Pkg and build
 #RUN cd /ros_ws && source /opt/ros/noetic/setup.bash && catkin build turtlebot ycos_cmd_vel_mux ycos_controllers ycos_velocity_smoother
 
 COPY /KobukiTeleop.py /ros_ws/src/joy_button_reader/src
 COPY /AbstractVirtualCapability.py /ros_ws/src/joy_button_reader/src
 COPY /requirements /var
+RUN chmod +x /ros_ws/src/joy_button_reader/src/AbstractVirtualCapability.py
+RUN chmod +x /ros_ws/src/joy_button_reader/src/KobukiTeleop.py
 
+RUN cd ros_ws && source /opt/ros/noetic/setup.bash && rosdep install --from-paths . --ignore-src -r -y
 RUN cd /ros_ws && source /opt/ros/noetic/setup.bash && catkin_make #turtlebot_teleop
 RUN source /ros_ws/devel/setup.bash
 
@@ -50,4 +52,4 @@ RUN echo "export ROS_MASTER_URI=http://172.20.37.158:11311" >> $HOME/.bashrc
 CMD source /ros_ws/devel/setup.bash && roslaunch joy_button_reader joy_button_reader.launch semantix_port:=${semantix_port}
 #&& rosrun joy_button_reader joy_button_reader.py
 #${semantix_port}
-#CMD bash
+CMD bash
