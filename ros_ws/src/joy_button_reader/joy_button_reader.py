@@ -6,7 +6,7 @@ import rospy
 from std_msgs.msg import String
 from sensor_msgs.msg import Joy
 
-from AbstractVirtualCapability import VirtualCapabilityServer
+from AbstractVirtualCapability import AbstractVirtualCapability, VirtualCapabilityServer, formatPrint
 from KobukiTeleop import KobukiTeleop
 
 max_timeout = 5
