@@ -26,11 +26,11 @@ COPY protocols /etc
 # Build Ros-Pkg and build
 #RUN cd /ros_ws && source /opt/ros/noetic/setup.bash && catkin build turtlebot ycos_cmd_vel_mux ycos_controllers ycos_velocity_smoother
 
-COPY /KobukiTeleop.py /ros_ws/src/joy_button_reader/src
-COPY /AbstractVirtualCapability.py /ros_ws/src/joy_button_reader/src
+COPY /KobukiTeleop.py /ros_ws/src/joy_button_reader
+COPY /AbstractVirtualCapability.py /ros_ws/src/joy_button_reader
 COPY /requirements /var
-RUN chmod +x /ros_ws/src/joy_button_reader/src/AbstractVirtualCapability.py
-RUN chmod +x /ros_ws/src/joy_button_reader/src/KobukiTeleop.py
+RUN chmod +x /ros_ws/src/joy_button_reader/AbstractVirtualCapability.py
+RUN chmod +x /ros_ws/src/joy_button_reader/KobukiTeleop.py
 
 RUN cd ros_ws && source /opt/ros/noetic/setup.bash && rosdep install --from-paths . --ignore-src -r -y
 RUN cd /ros_ws && source /opt/ros/noetic/setup.bash && catkin_make #turtlebot_teleop
