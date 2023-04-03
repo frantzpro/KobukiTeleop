@@ -23,9 +23,10 @@ class KobukiTeleop(AbstractVirtualCapability):
                 command["parameters"]["XBOX360Button"] = "X"
             elif self.functionality["pressedJoyY"]():
                 command["parameters"]["XBOX360Button"] = "Y"
-            if command["parameters"]["XBOX360Button"] is not None:
-                self.send_message(command)
 
+            if command["parameters"].get("XBOX360Button"):
+                self.send_message(command)
+                sleep(1)
 
 if __name__ == '__main__':
     # Needed for properly closing when process is being stopped with SIGTERM signal

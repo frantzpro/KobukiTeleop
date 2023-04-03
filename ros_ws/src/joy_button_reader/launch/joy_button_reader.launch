@@ -10,6 +10,7 @@
         <arg name="server" value="172.20.37.251" />
     </include>
     <!--  smooths inputs from cmd_vel_mux/input/teleop_raw to cmd_vel_mux/input/teleop -->
+    <node pkg="joy" type="joy_node" name="joystick"/>
 
     <node pkg="joy_button_reader" type="joy_button_reader.py" name="joy_reader">
         <param name="world" value="$(arg vicon_map)"/>
@@ -27,6 +28,4 @@
         <param name="axis_angular" value="0"/>
         <remap from="turtlebot_teleop_joystick/cmd_vel" to="teleop_velocity_smoother/raw_cmd_vel"/>
     </node>
-
-    <node pkg="joy" type="joy_node" name="joystick"/>
 </launch>

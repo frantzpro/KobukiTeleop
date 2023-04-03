@@ -30,7 +30,7 @@ COPY /KobukiTeleop.py /ros_ws/src/joy_button_reader
 COPY /AbstractVirtualCapability.py /ros_ws/src/joy_button_reader
 COPY /requirements /var
 
-RUN cd ros_ws && source /opt/ros/noetic/setup.bash && rosdep install --from-paths . --ignore-src -r -y
+#RUN cd ros_ws && source /opt/ros/noetic/setup.bash && rosdep install --from-paths . --ignore-src -r -y
 RUN cd /ros_ws && source /opt/ros/noetic/setup.bash && catkin build
 
 RUN source /ros_ws/devel/setup.bash
@@ -45,7 +45,7 @@ RUN source /ros_ws/devel/setup.bash
 #Setup Env
 ENTRYPOINT ["/ros_entrypoint.sh"]
 
-RUN echo "export ROS_MASTER_URI=http://172.20.37.158:11311" >> $HOME/.bashrc
+RUN echo "export ROS_MASTER_URI=http://172.20.34.240:11311" >> $HOME/.bashrc
 
 #Start Joy Controler
 CMD source /ros_ws/devel/setup.bash && roslaunch joy_button_reader joy_button_reader.launch semantix_port:=${semantix_port}
