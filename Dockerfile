@@ -27,11 +27,11 @@ RUN cd ros_ws && source /opt/ros/noetic/setup.bash && rosdep install --from-path
 # Build Ros-Pkg and build
 #RUN cd /ros_ws && source /opt/ros/noetic/setup.bash && catkin build turtlebot ycos_cmd_vel_mux ycos_controllers ycos_velocity_smoother
 
-COPY /KobukiTeleop.py /ros_ws/src/joy_button_reader/src
-COPY /AbstractVirtualCapability.py /ros_ws/src/joy_button_reader/src
+COPY /KobukiTeleop.py /ros_ws/src/joy_button_reader
+COPY /AbstractVirtualCapability.py /ros_ws/src/joy_button_reader
 COPY /requirements /var
 
-RUN cd /ros_ws && source /opt/ros/noetic/setup.bash && catkin_make #turtlebot_teleop
+RUN cd /ros_ws && source /opt/ros/noetic/setup.bash && catkin build #turtlebot_teleop
 RUN source /ros_ws/devel/setup.bash
 
 # docker build -t joy_docker
