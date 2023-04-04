@@ -9,7 +9,7 @@ from sensor_msgs.msg import Joy
 from AbstractVirtualCapability import AbstractVirtualCapability, VirtualCapabilityServer, formatPrint
 from KobukiTeleop import KobukiTeleop
 
-max_timeout = 5
+
 pressed_a = 0
 pressed_b = 0
 pressed_x = 0

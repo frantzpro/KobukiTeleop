@@ -26,7 +26,7 @@ class KobukiTeleop(AbstractVirtualCapability):
 
             if command["parameters"].get("XBOX360Button"):
                 self.send_message(command)
-                sleep(1)
+                #sleep(1)
 
 if __name__ == '__main__':
     # Needed for properly closing when process is being stopped with SIGTERM signal
