@@ -44,8 +44,9 @@ RUN source /ros_ws/devel/setup.bash
 
 #Setup Env
 ENTRYPOINT ["/ros_entrypoint.sh"]
-
+RUN export ROS_MASTER_URI=http://172.20.34.240:11311
 RUN echo "export ROS_MASTER_URI=http://172.20.34.240:11311" >> $HOME/.bashrc
 
 #Start Joy Controler
-CMD source /ros_ws/devel/setup.bash && roslaunch joy_button_reader joy_button_reader.launch semantix_port:=${semantix_port}
+CMD source /ros_ws/devel/setup.bash && export ROS_MASTER_URI=http://172.20.34.240:11311 && roslaunch joy_button_reader joy_button_reader.launch semantix_port:=${semantix_port}
+#CMD source /ros_ws/devel/setup.bash && bash
