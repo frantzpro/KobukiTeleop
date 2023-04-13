@@ -15,6 +15,7 @@
     <node pkg="joy_button_reader" type="joy_button_reader.py" name="joy_reader">
         <param name="world" value="$(arg vicon_map)"/>
         <param name="position" value="turtlebot/position"/>
+        <param name="map" value="turtlebot/map"/>
         <param name="semantix_port" value="$(arg semantix_port)"/>
     </node>
 

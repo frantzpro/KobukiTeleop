@@ -23,10 +23,12 @@ pressed_pos = 0
 
 def get_position():
 	try:
-		world = rospy.get_param('~world')
-		position = rospy.get_param('~position')
+
+		world_str = rospy.get_param('~world')
+		position_str = rospy.get_param('~position')
+		map_str = rospy.get_param('~map')
 		tfBuffer = tf2_ros.Buffer()
-		current = tfBuffer.lookup_transform(world, position, rospy.Time())
+		current = tfBuffer.lookup_transform(position_str, map_str, rospy.Time())
 		return current
 	except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException) as error:
 		rospy.logwarn(error)
