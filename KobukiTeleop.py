@@ -10,7 +10,14 @@ from AbstractVirtualCapability import AbstractVirtualCapability, VirtualCapabili
 class KobukiTeleop(AbstractVirtualCapability):
     def __init__(self, server):
         super().__init__(server)
-        self.functionality = {"pressedJoyA": None, "pressedJoyB": None, "pressedJoyX": None, "pressedJoyY": None}
+        self.functionality = {"pressedJoyA": None, "pressedJoyB": None, "pressedJoyX": None, "pressedJoyY": None, "GetKobukiPosition": None}
+
+    def GetKobukiPosition(self, params: dict) -> dict:
+        if self.functionality["GetKobukiPosition"] is not None:
+            pos = self.functionality["GetKobukiPosition"]()
+            return {"Position3D": pos}
+        else:
+            return {"Position3D": [0., 0., 0.]}
 
     def loop(self):
         command = {"type": "response", "capability": "pressedButton", "parameters": {}, "src": f"KobukiTeleop-{time.time()}"}
