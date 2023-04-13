@@ -27,8 +27,9 @@ def get_position():
 		world_str = rospy.get_param('~world')
 		position_str = rospy.get_param('~position')
 		map_str = rospy.get_param('~map')
+		vicon_frame = 'turtlebot'
 		tfBuffer = tf2_ros.Buffer()
-		current = tfBuffer.lookup_transform(position_str, map_str, rospy.Time())
+		current = tfBuffer.lookup_transform(map_str, vicon_frame, rospy.Time())
 		return current
 	except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException) as error:
 		rospy.logwarn(error)
