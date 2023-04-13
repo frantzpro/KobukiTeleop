@@ -16,23 +16,23 @@ pressed_b = 0
 pressed_x = 0
 pressed_y = 0
 
-
-
-pressed_pos = 0
+tfBuffer = None
+listener = None
 
 
 def get_position():
 	try:
-
+		"""
 		world_str = rospy.get_param('~world')
 		position_str = rospy.get_param('~position')
 		map_str = rospy.get_param('~map')
-		tfBuffer = tf2_ros.Buffer()
-		current = tfBuffer.lookup_transform(position_str, map_str, rospy.Time())
-		return current
+		
+"""
+		current = tfBuffer.lookup_transform('world', 'turtlebot', rospy.Time(0), rospy.Duration(1.0))
+		return [current.transform.translation.x, current.transform.translation.y, current.transform.translation.z]
 	except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException) as error:
 		rospy.logwarn(error)
-		return None
+		return [repr(error).replace("\"", "").replace("\'", "")]
 
 
 def callback(data):
@@ -66,6 +66,9 @@ if __name__ == '__main__':
 	# starts the node
 	rospy.init_node("joy_button_reader", anonymous=True)
 	rate = rospy.Rate(20)
+
+	tfBuffer = tf2_ros.Buffer()
+	listener = tf2_ros.TransformListener(tfBuffer)
 
 	server = VirtualCapabilityServer(int(rospy.get_param('~semantix_port')))
 	kobuki = KobukiTeleop(server)
