@@ -32,7 +32,7 @@ def get_position():
 		return [current.transform.translation.x, current.transform.translation.y, current.transform.translation.z]
 	except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException) as error:
 		rospy.logwarn(error)
-		return [repr(error).replace("\"", "").replace("\'", "")]
+		return [100,100,100] #[repr(error).replace("\"", "").replace("\'", "")]
 
 
 def callback(data):
