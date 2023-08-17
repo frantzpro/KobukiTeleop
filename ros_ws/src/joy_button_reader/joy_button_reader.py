@@ -10,7 +10,8 @@ from sensor_msgs.msg import Joy
 from AbstractVirtualCapability import AbstractVirtualCapability, VirtualCapabilityServer, formatPrint
 from KobukiTeleop import KobukiTeleop
 
-max_timeout = 0.0001
+# max_timeout has to be finetuned if Button-pressed events will not send
+max_timeout = 0.005
 pressed_a = 0
 pressed_b = 0
 pressed_x = 0
