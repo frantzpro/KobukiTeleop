@@ -29,7 +29,7 @@ class KobukiTeleop(AbstractVirtualCapability):
             elif self.functionality["pressedJoyX"]():
                 command["parameters"]["XBOX360Button"] = "X"
             elif self.functionality["pressedJoyY"]():
-                command["parameters"]["XBOX360Button"] = "Ya"
+                command["parameters"]["XBOX360Button"] = "Y"
 
             if command["parameters"].get("XBOX360Button"):
                 self.send_message(command)
